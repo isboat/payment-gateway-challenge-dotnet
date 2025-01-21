@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PaymentGateway.Api.Controllers;
 using PaymentGateway.Models.Responses;
 using PaymentGateway.Repositories;
+using PaymentGateway.Repositories.Interfaces;
 using PaymentGateway.Services;
 
 namespace PaymentGateway.Api.Tests;
@@ -35,7 +36,7 @@ public class PaymentsControllerTests
         var webApplicationFactory = new WebApplicationFactory<PaymentsController>();
         var client = webApplicationFactory.WithWebHostBuilder(builder =>
             builder.ConfigureServices(services => ((ServiceCollection)services)
-                .AddSingleton(paymentsRepository)))
+                .AddSingleton<IPaymentsRepository>(paymentsRepository)))
             .CreateClient();
 
         // Act

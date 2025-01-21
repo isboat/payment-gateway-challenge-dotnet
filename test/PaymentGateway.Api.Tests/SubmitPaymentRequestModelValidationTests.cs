@@ -16,6 +16,7 @@ using PaymentGateway.Services.Interfaces;
 using PaymentGateway.Services;
 using PaymentGateway.Common.Validators;
 using PaymentGateway.Models.Requests;
+using PaymentGateway.Models.Responses;
 
 namespace PaymentGateway.Api.Tests
 {
@@ -47,7 +48,8 @@ namespace PaymentGateway.Api.Tests
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var model = await response.Content.ReadFromJsonAsync<ValidationModel>();
+            var model = await response.Content.ReadFromJsonAsync<PostPaymentResponse>();
+            Assert.NotNull(model);
         }
 
         [Theory]

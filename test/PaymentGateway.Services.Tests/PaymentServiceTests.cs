@@ -64,7 +64,7 @@ namespace PaymentGateway.Services.Tests
 
             // Arrange
             Assert.NotNull(response);
-            Assert.Equal(Models.PaymentStatus.Authorized, response.Status);
+            Assert.Equal(Models.PaymentStatus.Authorized.ToString(), response.Status);
 
         }
     }

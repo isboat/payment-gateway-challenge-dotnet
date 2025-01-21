@@ -41,7 +41,7 @@ public class PaymentService : IPaymentService
         var paymentResponse = new PostPaymentResponse
         {
             Id = Guid.NewGuid(),
-            Status = PaymentStatus.Rejected,
+            Status = PaymentStatus.Rejected.ToString(),
             Amount = submitPaymentRequest.Amount,
             Currency = submitPaymentRequest.Currency,
             ExpiryMonth = submitPaymentRequest.ExpiryMonth,
@@ -60,7 +60,7 @@ public class PaymentService : IPaymentService
             }
             validationResult.Add(result);
         }
-        if (validationResult.Any(x => !x.IsValid)) return paymentResponse;
+        //if (validationResult.Any(x => !x.IsValid)) return paymentResponse;
 
 
         // Submit to bank
@@ -69,8 +69,8 @@ public class PaymentService : IPaymentService
 
         // store payment result in repo
         // use a library to convert the bank result to pyament response result
-        paymentResponse.Status = simulatorResponse.Authorized ? PaymentStatus.Authorized : PaymentStatus.Rejected;
-        paymentResponse.Id = Guid.Parse(simulatorResponse.AuthorizationCode);
+        paymentResponse.Status = simulatorResponse.Authorized ? PaymentStatus.Authorized.ToString() : PaymentStatus.Declined.ToString();
+        if(!string.IsNullOrEmpty(simulatorResponse.AuthorizationCode)) paymentResponse.Id = Guid.Parse(simulatorResponse.AuthorizationCode);
 
         _paymentRepository.Add(paymentResponse);
 

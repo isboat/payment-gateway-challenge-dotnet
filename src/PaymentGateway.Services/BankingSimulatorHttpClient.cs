@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace PaymentGateway.Api.Services;
 
+/// <inheritdoc />
 public class BankingSimulatorHttpClient : IBankingSimulatorHttpClient
 {
     private readonly HttpClient _httpClient;
@@ -19,6 +20,7 @@ public class BankingSimulatorHttpClient : IBankingSimulatorHttpClient
         _logger = logger;
     }
 
+    /// <inheritdoc />
     public async Task<BankingSimulatorResponse?> SubmitPaymentAsync(PostPaymentRequest request)
     {
         var bankingSimulatorRequest = new BankingSimulatorRequest()

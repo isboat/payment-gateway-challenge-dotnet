@@ -3,17 +3,20 @@ using PaymentGateway.Models.Responses;
 
 namespace PaymentGateway.Repositories;
 
+/// <inheritdoc />
 public class PaymentsRepository: IPaymentsRepository
 {
-    private List<PostPaymentResponse> payments = new();
-    
+    private readonly List<PostPaymentResponse> _payments = [];
+
+    /// <inheritdoc />
     public void Add(PostPaymentResponse payment)
     {
-        payments.Add(payment);
+        _payments.Add(payment);
     }
 
+    /// <inheritdoc />
     public PostPaymentResponse Get(Guid id)
     {
-        return payments.FirstOrDefault(p => p.Id == id);
+        return _payments.FirstOrDefault(p => p.Id == id);
     }
 }

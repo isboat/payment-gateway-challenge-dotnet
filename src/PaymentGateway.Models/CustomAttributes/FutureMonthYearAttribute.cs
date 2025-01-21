@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PaymentGateway.Models.CustomAttributes
 {
+    /// <summary>
+    /// Ensuring the combination of expiry month + year is in the future
+    /// </summary>
     public class FutureMonthYearAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

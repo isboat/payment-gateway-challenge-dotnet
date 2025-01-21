@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace PaymentGateway.Services;
 
+/// <inheritdoc />
 public class PaymentService : IPaymentService
 {
     private readonly IPaymentsRepository _paymentRepository;
@@ -29,11 +30,13 @@ public class PaymentService : IPaymentService
         _paymentRequestValidators = paymentRequestValidators;
     }
 
+    /// <inheritdoc />
     public async Task<PostPaymentResponse> GetAsync(Guid id)
     {
         return await Task.FromResult(_paymentRepository.Get(id));
     }
 
+    /// <inheritdoc />
     public async Task<PostPaymentResponse> ProcessPaymentAsync(PostPaymentRequest submitPaymentRequest)
     {
         if (submitPaymentRequest == null) return null;
@@ -68,7 +71,6 @@ public class PaymentService : IPaymentService
         if (simulatorResponse == null) return paymentResponse;
 
         // store payment result in repo
-        // use a library to convert the bank result to pyament response result
         paymentResponse.Status = simulatorResponse.Authorized ? PaymentStatus.Authorized.ToString() : PaymentStatus.Declined.ToString();
         if(!string.IsNullOrEmpty(simulatorResponse.AuthorizationCode)) paymentResponse.Id = Guid.Parse(simulatorResponse.AuthorizationCode);
 

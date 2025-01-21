@@ -2,6 +2,9 @@
 
 namespace PaymentGateway.Models.CustomAttributes
 {
+    /// <summary>
+    /// Value must be in the future
+    /// </summary>
     public class FutureYearAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

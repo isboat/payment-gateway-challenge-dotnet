@@ -58,7 +58,7 @@ namespace PaymentGateway.Api.Middlewares
             else
             {
                 statusCode = StatusCodes.Status500InternalServerError;
-                message = "Server Error";
+                message = "Internal Server Error";
             }
 
             var problemDetails = new ProblemDetails
